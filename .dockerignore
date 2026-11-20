@@ -1,0 +1,7 @@
+*
+!requirements.txt
+!constraints.txt
+!browzine_mock/
+!browzine_mock/*.py
+!data/
+!data/mock_data.json

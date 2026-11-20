@@ -1,0 +1,1081 @@
+{
+  "journals": [
+    {
+      "journal_id": "J01",
+      "title": "Journal of Applied Machine Learning",
+      "issn": "1234-5679",
+      "subject": "Artificial Intelligence",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J02",
+      "title": "Intelligent Systems Review",
+      "issn": "2345-6787",
+      "subject": "Artificial Intelligence",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J03",
+      "title": "Neural Computation Letters",
+      "issn": "2049-3630",
+      "subject": "Artificial Intelligence",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J04",
+      "title": "Computer Vision in Practice",
+      "issn": "3456-7895",
+      "subject": "Computer Vision",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J05",
+      "title": "Image Understanding Reports",
+      "issn": "4567-8901",
+      "subject": "Computer Vision",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J06",
+      "title": "Computational Language Quarterly",
+      "issn": "5678-9017",
+      "subject": "Natural Language Processing",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J07",
+      "title": "Applied Language Technology Letters",
+      "issn": "6789-0121",
+      "subject": "Natural Language Processing",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J08",
+      "title": "Autonomous Robotics Letters",
+      "issn": "7890-1235",
+      "subject": "Robotics and Autonomous Systems",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J09",
+      "title": "Intelligent Control Systems Journal",
+      "issn": "8901-2348",
+      "subject": "Robotics and Autonomous Systems",
+      "publisher": "PolyGate Synthetic Press"
+    },
+    {
+      "journal_id": "J10",
+      "title": "AI Ethics and Governance Review",
+      "issn": "9012-345X",
+      "subject": "AI Ethics and Governance",
+      "publisher": "PolyGate Synthetic Press"
+    }
+  ],
+  "issues": [
+    {
+      "issue_id": "I01",
+      "journal_id": "J01",
+      "volume": 10,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-13",
+      "status": "published"
+    },
+    {
+      "issue_id": "I02",
+      "journal_id": "J01",
+      "volume": 10,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-13",
+      "status": "published"
+    },
+    {
+      "issue_id": "I03",
+      "journal_id": "J02",
+      "volume": 11,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-14",
+      "status": "published"
+    },
+    {
+      "issue_id": "I04",
+      "journal_id": "J02",
+      "volume": 11,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-14",
+      "status": "published"
+    },
+    {
+      "issue_id": "I05",
+      "journal_id": "J03",
+      "volume": 12,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-15",
+      "status": "published"
+    },
+    {
+      "issue_id": "I06",
+      "journal_id": "J03",
+      "volume": 12,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": null,
+      "status": "in_press"
+    },
+    {
+      "issue_id": "I07",
+      "journal_id": "J04",
+      "volume": 13,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-16",
+      "status": "published"
+    },
+    {
+      "issue_id": "I08",
+      "journal_id": "J04",
+      "volume": 13,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-16",
+      "status": "published"
+    },
+    {
+      "issue_id": "I09",
+      "journal_id": "J05",
+      "volume": 14,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-17",
+      "status": "published"
+    },
+    {
+      "issue_id": "I10",
+      "journal_id": "J05",
+      "volume": 14,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-17",
+      "status": "published"
+    },
+    {
+      "issue_id": "I11",
+      "journal_id": "J06",
+      "volume": 15,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-18",
+      "status": "published"
+    },
+    {
+      "issue_id": "I12",
+      "journal_id": "J06",
+      "volume": 15,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-18",
+      "status": "published"
+    },
+    {
+      "issue_id": "I13",
+      "journal_id": "J07",
+      "volume": 16,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-19",
+      "status": "published"
+    },
+    {
+      "issue_id": "I14",
+      "journal_id": "J07",
+      "volume": 16,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": null,
+      "status": "in_press"
+    },
+    {
+      "issue_id": "I15",
+      "journal_id": "J08",
+      "volume": 17,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-20",
+      "status": "published"
+    },
+    {
+      "issue_id": "I16",
+      "journal_id": "J08",
+      "volume": 17,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-20",
+      "status": "published"
+    },
+    {
+      "issue_id": "I17",
+      "journal_id": "J09",
+      "volume": 18,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-21",
+      "status": "published"
+    },
+    {
+      "issue_id": "I18",
+      "journal_id": "J09",
+      "volume": 18,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-21",
+      "status": "published"
+    },
+    {
+      "issue_id": "I19",
+      "journal_id": "J10",
+      "volume": 19,
+      "issue_number": 3,
+      "year": 2026,
+      "publication_date": "2026-09-22",
+      "status": "published"
+    },
+    {
+      "issue_id": "I20",
+      "journal_id": "J10",
+      "volume": 19,
+      "issue_number": 4,
+      "year": 2026,
+      "publication_date": "2026-10-22",
+      "status": "published"
+    }
+  ],
+  "articles": [
+    {
+      "article_id": "A001",
+      "issue_id": "I01",
+      "title": "Gradient Boosting for Campus Energy Forecasting",
+      "authors": [
+        "Cheung, Hoi Yan",
+        "Fung, Man Kit"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/jaml.10.3.101"
+    },
+    {
+      "article_id": "A002",
+      "issue_id": "I01",
+      "title": "Transfer Learning with Small Medical Image Sets",
+      "authors": [
+        "Ho, Kin Fai",
+        "Mak, Lok Yee",
+        "Chan, Siu Fong"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/jaml.10.3.121"
+    },
+    {
+      "article_id": "A003",
+      "issue_id": "I01",
+      "title": "Fairness Audits for Admission Scoring Models",
+      "authors": [
+        "Leung, Hiu Tung"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/jaml.10.3.141"
+    },
+    {
+      "article_id": "A004",
+      "issue_id": "I02",
+      "title": "Active Learning for Library Record Matching",
+      "authors": [
+        "Kwok, Wai Ming",
+        "Sin, Mei Ling"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/jaml.10.4.101"
+    },
+    {
+      "article_id": "A005",
+      "issue_id": "I02",
+      "title": "Benchmarking Tabular Classifiers on Noisy Labels",
+      "authors": [
+        "Tsang, Hoi Yan",
+        "Wong, Man Kit",
+        "Leung, Wing Sze"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/jaml.10.4.121"
+    },
+    {
+      "article_id": "A006",
+      "issue_id": "I02",
+      "title": "Federated Training Across Teaching Laboratories",
+      "authors": [
+        "Poon, Kin Fai"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/jaml.10.4.141"
+    },
+    {
+      "article_id": "A007",
+      "issue_id": "I03",
+      "title": "Planning Under Uncertainty for Delivery Robots",
+      "authors": [
+        "Lee, Hiu Tung",
+        "Tang, Kam Fai"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/isr.11.3.101"
+    },
+    {
+      "article_id": "A008",
+      "issue_id": "I03",
+      "title": "Explainable Recommendations in Course Selection",
+      "authors": [
+        "Lam, Wai Ming",
+        "Chow, Mei Ling",
+        "Poon, Tak Shing"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/isr.11.3.121"
+    },
+    {
+      "article_id": "A009",
+      "issue_id": "I03",
+      "title": "Multi-Agent Coordination in Smart Buildings",
+      "authors": [
+        "Yip, Hoi Yan"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/isr.11.3.141"
+    },
+    {
+      "article_id": "A010",
+      "issue_id": "I04",
+      "title": "Knowledge Graphs for Technical Support Dialogues",
+      "authors": [
+        "Fung, Kin Fai",
+        "Yeung, Lok Yee"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/isr.11.4.101"
+    },
+    {
+      "article_id": "A011",
+      "issue_id": "I04",
+      "title": "Reinforcement Learning for Elevator Dispatch",
+      "authors": [
+        "Mak, Hiu Tung",
+        "Chan, Kam Fai",
+        "Yip, Sze Yan"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/isr.11.4.121"
+    },
+    {
+      "article_id": "A012",
+      "issue_id": "I04",
+      "title": "A Survey of Constraint Solvers in Timetabling",
+      "authors": [
+        "Ip, Wai Ming"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/isr.11.4.141"
+    },
+    {
+      "article_id": "A013",
+      "issue_id": "I05",
+      "title": "Spiking Network Models for Sensor Fusion",
+      "authors": [
+        "Chan, Wai Ming",
+        "Lee, Sze Yan"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/ncl.12.3.101"
+    },
+    {
+      "article_id": "A014",
+      "issue_id": "I05",
+      "title": "Sparse Attention for Long Sensor Sequences",
+      "authors": [
+        "Wong, Kin Fai",
+        "Leung, Lok Yee",
+        "Ip, Siu Fong"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/ncl.12.3.121"
+    },
+    {
+      "article_id": "A015",
+      "issue_id": "I05",
+      "title": "Energy-Efficient Training of Compact Networks",
+      "authors": [
+        "Ng, Hiu Tung"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/ncl.12.3.141"
+    },
+    {
+      "article_id": "A016",
+      "issue_id": "I06",
+      "title": "Weight Sharing in Convolutional Encoders",
+      "authors": [
+        "Tang, Wai Ming",
+        "Tsang, Mei Ling"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/ncl.12.4.101"
+    },
+    {
+      "article_id": "A017",
+      "issue_id": "I06",
+      "title": "Latent Representations of Seismic Signals",
+      "authors": [
+        "Chow, Hoi Yan",
+        "Poon, Man Kit",
+        "Ng, Wing Sze"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/ncl.12.4.121"
+    },
+    {
+      "article_id": "A018",
+      "issue_id": "I06",
+      "title": "Robustness of Recurrent Models to Missing Data",
+      "authors": [
+        "Lau, Kin Fai"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/ncl.12.4.141"
+    },
+    {
+      "article_id": "A019",
+      "issue_id": "I07",
+      "title": "Object Detection for Campus Safety Cameras",
+      "authors": [
+        "Yeung, Hiu Tung",
+        "Lam, Kam Fai"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/cvp.13.3.101"
+    },
+    {
+      "article_id": "A020",
+      "issue_id": "I07",
+      "title": "Low-Light Image Enhancement with Lightweight Models",
+      "authors": [
+        "Chan, Wai Ming",
+        "Yip, Mei Ling",
+        "Lau, Tak Shing"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/cvp.13.3.121"
+    },
+    {
+      "article_id": "A021",
+      "issue_id": "I07",
+      "title": "Medical Image Segmentation with Few Labels",
+      "authors": [
+        "Cheung, Hoi Yan"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/cvp.13.3.141"
+    },
+    {
+      "article_id": "A022",
+      "issue_id": "I08",
+      "title": "Visual Inspection of Concrete Surfaces",
+      "authors": [
+        "Ho, Kin Fai",
+        "Mak, Lok Yee"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/cvp.13.4.101"
+    },
+    {
+      "article_id": "A023",
+      "issue_id": "I08",
+      "title": "Self-Supervised Features for Video Retrieval",
+      "authors": [
+        "Leung, Hiu Tung",
+        "Ip, Kam Fai",
+        "Cheung, Sze Yan"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/cvp.13.4.121"
+    },
+    {
+      "article_id": "A024",
+      "issue_id": "I08",
+      "title": "Pose Estimation in Crowded Laboratories",
+      "authors": [
+        "Kwok, Wai Ming"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/cvp.13.4.141"
+    },
+    {
+      "article_id": "A025",
+      "issue_id": "I09",
+      "title": "Scene Graphs for Indoor Navigation",
+      "authors": [
+        "Tsang, Hoi Yan",
+        "Wong, Man Kit"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/iur.14.3.101"
+    },
+    {
+      "article_id": "A026",
+      "issue_id": "I09",
+      "title": "Domain Shift in Satellite Image Classification",
+      "authors": [
+        "Poon, Kin Fai",
+        "Ng, Lok Yee",
+        "Kwok, Siu Fong"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/iur.14.3.121"
+    },
+    {
+      "article_id": "A027",
+      "issue_id": "I09",
+      "title": "Efficient Vision Transformers on Edge Devices",
+      "authors": [
+        "Lee, Hiu Tung"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/iur.14.3.141"
+    },
+    {
+      "article_id": "A028",
+      "issue_id": "I10",
+      "title": "Depth Estimation from Single Images",
+      "authors": [
+        "Lam, Wai Ming",
+        "Chow, Mei Ling"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/iur.14.4.101"
+    },
+    {
+      "article_id": "A029",
+      "issue_id": "I10",
+      "title": "Benchmarking Optical Character Recognition on Forms",
+      "authors": [
+        "Yip, Hoi Yan",
+        "Lau, Man Kit",
+        "Lee, Wing Sze"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/iur.14.4.121"
+    },
+    {
+      "article_id": "A030",
+      "issue_id": "I10",
+      "title": "Synthetic Data for Traffic Sign Recognition",
+      "authors": [
+        "Fung, Kin Fai"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/iur.14.4.141"
+    },
+    {
+      "article_id": "A031",
+      "issue_id": "I11",
+      "title": "Cross-Lingual Transfer for Cantonese Text",
+      "authors": [
+        "Mak, Hiu Tung",
+        "Chan, Kam Fai"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/clq.15.3.101"
+    },
+    {
+      "article_id": "A032",
+      "issue_id": "I11",
+      "title": "Summarising Academic Abstracts with Small Models",
+      "authors": [
+        "Ip, Wai Ming",
+        "Cheung, Mei Ling",
+        "Fung, Tak Shing"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/clq.15.3.121"
+    },
+    {
+      "article_id": "A033",
+      "issue_id": "I11",
+      "title": "Evaluating Retrieval-Augmented Question Answering",
+      "authors": [
+        "Sin, Hoi Yan"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/clq.15.3.141"
+    },
+    {
+      "article_id": "A034",
+      "issue_id": "I12",
+      "title": "Named Entity Recognition in Library Catalogues",
+      "authors": [
+        "Wong, Kin Fai",
+        "Leung, Lok Yee"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/clq.15.4.101"
+    },
+    {
+      "article_id": "A035",
+      "issue_id": "I12",
+      "title": "Detecting Bias in Language Model Outputs",
+      "authors": [
+        "Ng, Hiu Tung",
+        "Kwok, Kam Fai",
+        "Sin, Sze Yan"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/clq.15.4.121"
+    },
+    {
+      "article_id": "A036",
+      "issue_id": "I12",
+      "title": "Speech Recognition for Code-Switched Lectures",
+      "authors": [
+        "Tang, Wai Ming"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/clq.15.4.141"
+    },
+    {
+      "article_id": "A037",
+      "issue_id": "I13",
+      "title": "Prompt Design for Student Feedback Tools",
+      "authors": [
+        "Chow, Hoi Yan",
+        "Poon, Man Kit"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/alt.16.3.101"
+    },
+    {
+      "article_id": "A038",
+      "issue_id": "I13",
+      "title": "Machine Translation for Technical Manuals",
+      "authors": [
+        "Lau, Kin Fai",
+        "Lee, Lok Yee",
+        "Tang, Siu Fong"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/alt.16.3.121"
+    },
+    {
+      "article_id": "A039",
+      "issue_id": "I13",
+      "title": "Dialogue Systems for Library Enquiries",
+      "authors": [
+        "Yeung, Hiu Tung"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/alt.16.3.141"
+    },
+    {
+      "article_id": "A040",
+      "issue_id": "I14",
+      "title": "Sentiment Analysis of Course Reviews",
+      "authors": [
+        "Chan, Wai Ming",
+        "Yip, Mei Ling"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/alt.16.4.101"
+    },
+    {
+      "article_id": "A041",
+      "issue_id": "I14",
+      "title": "Keyword Extraction from Research Papers",
+      "authors": [
+        "Cheung, Hoi Yan",
+        "Fung, Man Kit",
+        "Yeung, Wing Sze"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/alt.16.4.121"
+    },
+    {
+      "article_id": "A042",
+      "issue_id": "I14",
+      "title": "Tokenisation Choices for Chinese Text",
+      "authors": [
+        "Ho, Kin Fai"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/alt.16.4.141"
+    },
+    {
+      "article_id": "A043",
+      "issue_id": "I15",
+      "title": "Path Planning for Warehouse Robots",
+      "authors": [
+        "Leung, Hiu Tung",
+        "Ip, Kam Fai"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/arl.17.3.101"
+    },
+    {
+      "article_id": "A044",
+      "issue_id": "I15",
+      "title": "Sensor Calibration for Mobile Manipulators",
+      "authors": [
+        "Kwok, Wai Ming",
+        "Sin, Mei Ling",
+        "Ho, Tak Shing"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/arl.17.3.121"
+    },
+    {
+      "article_id": "A045",
+      "issue_id": "I15",
+      "title": "Swarm Coordination with Limited Communication",
+      "authors": [
+        "Tsang, Hoi Yan"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/arl.17.3.141"
+    },
+    {
+      "article_id": "A046",
+      "issue_id": "I16",
+      "title": "Grasping Deformable Objects",
+      "authors": [
+        "Poon, Kin Fai",
+        "Ng, Lok Yee"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/arl.17.4.101"
+    },
+    {
+      "article_id": "A047",
+      "issue_id": "I16",
+      "title": "Safe Navigation Among Pedestrians",
+      "authors": [
+        "Lee, Hiu Tung",
+        "Tang, Kam Fai",
+        "Tsang, Sze Yan"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/arl.17.4.121"
+    },
+    {
+      "article_id": "A048",
+      "issue_id": "I16",
+      "title": "Simulation-to-Real Transfer for Drones",
+      "authors": [
+        "Lam, Wai Ming"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/arl.17.4.141"
+    },
+    {
+      "article_id": "A049",
+      "issue_id": "I17",
+      "title": "Model Predictive Control for Building Climate",
+      "authors": [
+        "Yip, Hoi Yan",
+        "Lau, Man Kit"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/ics.18.3.101"
+    },
+    {
+      "article_id": "A050",
+      "issue_id": "I17",
+      "title": "Learning Controllers for Robotic Arms",
+      "authors": [
+        "Fung, Kin Fai",
+        "Yeung, Lok Yee",
+        "Lam, Siu Fong"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/ics.18.3.121"
+    },
+    {
+      "article_id": "A051",
+      "issue_id": "I17",
+      "title": "Fault Detection in Autonomous Vehicles",
+      "authors": [
+        "Mak, Hiu Tung"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/ics.18.3.141"
+    },
+    {
+      "article_id": "A052",
+      "issue_id": "I18",
+      "title": "Adaptive Control Under Sensor Drift",
+      "authors": [
+        "Ip, Wai Ming",
+        "Cheung, Mei Ling"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/ics.18.4.101"
+    },
+    {
+      "article_id": "A053",
+      "issue_id": "I18",
+      "title": "Energy Management with Reinforcement Learning",
+      "authors": [
+        "Sin, Hoi Yan",
+        "Ho, Man Kit",
+        "Mak, Wing Sze"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/ics.18.4.121"
+    },
+    {
+      "article_id": "A054",
+      "issue_id": "I18",
+      "title": "Verification of Learned Control Policies",
+      "authors": [
+        "Wong, Kin Fai"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/ics.18.4.141"
+    },
+    {
+      "article_id": "A055",
+      "issue_id": "I19",
+      "title": "Accountability Frameworks for Automated Decisions",
+      "authors": [
+        "Ng, Hiu Tung",
+        "Kwok, Kam Fai"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/aeg.19.3.101"
+    },
+    {
+      "article_id": "A056",
+      "issue_id": "I19",
+      "title": "Transparency Requirements for Student Analytics",
+      "authors": [
+        "Tang, Wai Ming",
+        "Tsang, Mei Ling",
+        "Wong, Tak Shing"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/aeg.19.3.121"
+    },
+    {
+      "article_id": "A057",
+      "issue_id": "I19",
+      "title": "Auditing Recommendation Systems for Bias",
+      "authors": [
+        "Chow, Hoi Yan"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/aeg.19.3.141"
+    },
+    {
+      "article_id": "A058",
+      "issue_id": "I20",
+      "title": "Consent and Data Use in Learning Platforms",
+      "authors": [
+        "Lau, Kin Fai",
+        "Lee, Lok Yee"
+      ],
+      "start_page": 101,
+      "end_page": 115,
+      "doi": "10.9999/aeg.19.4.101"
+    },
+    {
+      "article_id": "A059",
+      "issue_id": "I20",
+      "title": "Risk Assessment for Generative Tools",
+      "authors": [
+        "Yeung, Hiu Tung",
+        "Lam, Kam Fai",
+        "Chow, Sze Yan"
+      ],
+      "start_page": 121,
+      "end_page": 135,
+      "doi": "10.9999/aeg.19.4.121"
+    },
+    {
+      "article_id": "A060",
+      "issue_id": "I20",
+      "title": "Human Oversight in Automated Marking",
+      "authors": [
+        "Chan, Wai Ming"
+      ],
+      "start_page": 141,
+      "end_page": 155,
+      "doi": "10.9999/aeg.19.4.141"
+    }
+  ],
+  "bookshelf": [
+    {
+      "journal_id": "J01",
+      "position": 1
+    },
+    {
+      "journal_id": "J04",
+      "position": 2
+    }
+  ],
+  "saved_articles": [],
+  "notifications": [
+    {
+      "notification_id": "N-I01",
+      "issue_id": "I01",
+      "read": true
+    },
+    {
+      "notification_id": "N-I02",
+      "issue_id": "I02",
+      "read": false
+    },
+    {
+      "notification_id": "N-I03",
+      "issue_id": "I03",
+      "read": false
+    },
+    {
+      "notification_id": "N-I04",
+      "issue_id": "I04",
+      "read": false
+    },
+    {
+      "notification_id": "N-I05",
+      "issue_id": "I05",
+      "read": false
+    },
+    {
+      "notification_id": "N-I07",
+      "issue_id": "I07",
+      "read": false
+    },
+    {
+      "notification_id": "N-I08",
+      "issue_id": "I08",
+      "read": false
+    },
+    {
+      "notification_id": "N-I09",
+      "issue_id": "I09",
+      "read": false
+    },
+    {
+      "notification_id": "N-I10",
+      "issue_id": "I10",
+      "read": false
+    },
+    {
+      "notification_id": "N-I11",
+      "issue_id": "I11",
+      "read": false
+    },
+    {
+      "notification_id": "N-I12",
+      "issue_id": "I12",
+      "read": false
+    },
+    {
+      "notification_id": "N-I13",
+      "issue_id": "I13",
+      "read": false
+    },
+    {
+      "notification_id": "N-I15",
+      "issue_id": "I15",
+      "read": false
+    },
+    {
+      "notification_id": "N-I16",
+      "issue_id": "I16",
+      "read": false
+    },
+    {
+      "notification_id": "N-I17",
+      "issue_id": "I17",
+      "read": false
+    },
+    {
+      "notification_id": "N-I18",
+      "issue_id": "I18",
+      "read": false
+    },
+    {
+      "notification_id": "N-I19",
+      "issue_id": "I19",
+      "read": false
+    },
+    {
+      "notification_id": "N-I20",
+      "issue_id": "I20",
+      "read": false
+    }
+  ]
+}

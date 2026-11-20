@@ -1,0 +1,1584 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "PolyGate BrowZine Mock API",
+    "version": "0.2.0",
+    "description": "Synthetic mock of BrowZine-style journal search, bookshelf, notifications, saved articles and citation export. Single mock user (U1); no authentication. All routes are our own design, not a published BrowZine schema. Dates are local Hong Kong time. See docs/API_DESIGN.md."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:8000",
+      "description": "Local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Journals"
+    },
+    {
+      "name": "Bookshelf"
+    },
+    {
+      "name": "Notifications"
+    },
+    {
+      "name": "Saved articles"
+    },
+    {
+      "name": "Citations"
+    },
+    {
+      "name": "Health"
+    }
+  ],
+  "paths": {
+    "/journals": {
+      "get": {
+        "tags": [
+          "Journals"
+        ],
+        "operationId": "search_journals",
+        "summary": "Search journals",
+        "description": "Find journals by title substring, subject or ISSN. Filters combine with AND; no filter lists all. Sorted by title.",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "example": "neural",
+            "description": "Case-insensitive title substring."
+          },
+          {
+            "name": "subject",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "example": "Artificial Intelligence",
+            "description": "Exact subject, case-insensitive."
+          },
+          {
+            "name": "issn",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]{4}-[0-9]{3}[0-9X]$"
+            },
+            "example": "2049-3630"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 50,
+              "default": 20
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalList"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "journal_id": "J03",
+                      "title": "Neural Computation Letters",
+                      "issn": "2049-3630",
+                      "subject": "Artificial Intelligence",
+                      "in_bookshelf": false
+                    }
+                  ],
+                  "meta": {
+                    "total": 1,
+                    "limit": 20,
+                    "offset": 0
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/journals/{journal_id}": {
+      "get": {
+        "tags": [
+          "Journals"
+        ],
+        "operationId": "get_journal_details",
+        "summary": "Get journal details",
+        "description": "One journal with its issues, newest first.",
+        "parameters": [
+          {
+            "name": "journal_id",
+            "in": "path",
+            "required": true,
+            "description": "Journal identifier.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "J03"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JournalResponse"
+                },
+                "example": {
+                  "data": {
+                    "journal_id": "J03",
+                    "title": "Neural Computation Letters",
+                    "issn": "2049-3630",
+                    "subject": "Artificial Intelligence",
+                    "publisher": "PolyGate Synthetic Press",
+                    "in_bookshelf": false,
+                    "issues": [
+                      {
+                        "issue_id": "I06",
+                        "volume": 12,
+                        "issue_number": 4,
+                        "year": 2026,
+                        "publication_date": null,
+                        "status": "in_press",
+                        "article_count": 3
+                      },
+                      {
+                        "issue_id": "I05",
+                        "volume": 12,
+                        "issue_number": 3,
+                        "year": 2026,
+                        "publication_date": "2026-09-15",
+                        "status": "published",
+                        "article_count": 3
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The journal does not exist.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/journals/{journal_id}/articles": {
+      "get": {
+        "tags": [
+          "Journals"
+        ],
+        "operationId": "list_articles_by_journal",
+        "summary": "List articles by journal",
+        "description": "The only article-discovery route: article IDs and basic metadata, newest issue first.",
+        "parameters": [
+          {
+            "name": "journal_id",
+            "in": "path",
+            "required": true,
+            "description": "Journal identifier.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "J03"
+          },
+          {
+            "name": "issue_id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "I05",
+            "description": "Restrict to one issue of this journal."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleList"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "article_id": "A013",
+                      "journal_id": "J03",
+                      "journal_title": "Neural Computation Letters",
+                      "issue_id": "I05",
+                      "volume": 12,
+                      "issue_number": 3,
+                      "year": 2026,
+                      "title": "Spiking Network Models for Sensor Fusion",
+                      "authors": [
+                        "Chan, Wai Ming",
+                        "Lee, Sze Yan"
+                      ],
+                      "start_page": 101,
+                      "end_page": 115,
+                      "doi": "10.9999/ncl.12.3.101",
+                      "saved": false
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The journal does not exist, the issue does not exist, or the issue belongs to another journal.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookshelf": {
+      "get": {
+        "tags": [
+          "Bookshelf"
+        ],
+        "operationId": "list_bookshelf",
+        "summary": "List bookshelf",
+        "description": "Followed journals in the order followed, with unread notification counts.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Bookshelf"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "journal_id": "J03",
+                      "title": "Neural Computation Letters",
+                      "issn": "2049-3630",
+                      "subject": "Artificial Intelligence",
+                      "unread_count": 1
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Bookshelf"
+        ],
+        "operationId": "add_to_bookshelf",
+        "summary": "Add to bookshelf",
+        "description": "Follow a journal. Its notifications become visible.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddBookshelfRequest"
+              },
+              "example": {
+                "journal_id": "J03"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Journal followed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BookshelfEntryResponse"
+                },
+                "example": {
+                  "data": {
+                    "journal_id": "J03",
+                    "title": "Neural Computation Letters",
+                    "issn": "2049-3630",
+                    "subject": "Artificial Intelligence",
+                    "unread_count": 1
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The journal does not exist.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The journal is already on the bookshelf.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bookshelf/{journal_id}": {
+      "delete": {
+        "tags": [
+          "Bookshelf"
+        ],
+        "operationId": "remove_from_bookshelf",
+        "summary": "Remove from bookshelf",
+        "description": "Unfollow a journal. Its notifications are hidden but keep their read state.",
+        "parameters": [
+          {
+            "name": "journal_id",
+            "in": "path",
+            "required": true,
+            "description": "Journal identifier.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "J03"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removed"
+          },
+          "404": {
+            "description": "The journal does not exist.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The journal is not on the bookshelf.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "list_notifications",
+        "summary": "List notifications",
+        "description": "New published issues of bookshelf journals. Newest first.",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "unread",
+                "read",
+                "all"
+              ],
+              "default": "all"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationList"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "notification_id": "N-I05",
+                      "journal_id": "J03",
+                      "journal_title": "Neural Computation Letters",
+                      "issue_id": "I05",
+                      "volume": 12,
+                      "issue_number": 3,
+                      "publication_date": "2026-09-15",
+                      "article_count": 3,
+                      "read": false
+                    }
+                  ],
+                  "meta": {
+                    "unread_count": 1
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/notifications/{notification_id}/read": {
+      "post": {
+        "tags": [
+          "Notifications"
+        ],
+        "operationId": "mark_notification_read",
+        "summary": "Mark notification read",
+        "description": "Takes no request body; any body is rejected with 422 and nothing changes.",
+        "parameters": [
+          {
+            "name": "notification_id",
+            "in": "path",
+            "required": true,
+            "description": "Notification identifier, N-<issue_id>.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "N-I05"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated notification",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotificationResponse"
+                },
+                "example": {
+                  "data": {
+                    "notification_id": "N-I05",
+                    "journal_id": "J03",
+                    "journal_title": "Neural Computation Letters",
+                    "issue_id": "I05",
+                    "volume": 12,
+                    "issue_number": 3,
+                    "publication_date": "2026-09-15",
+                    "article_count": 3,
+                    "read": true
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The notification does not exist or its journal is not on the bookshelf.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The notification is already read.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saved-articles": {
+      "get": {
+        "tags": [
+          "Saved articles"
+        ],
+        "operationId": "list_saved_articles",
+        "summary": "List saved articles",
+        "description": "Saved articles in the order saved.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleList"
+                },
+                "example": {
+                  "data": [
+                    {
+                      "article_id": "A013",
+                      "journal_id": "J03",
+                      "journal_title": "Neural Computation Letters",
+                      "issue_id": "I05",
+                      "volume": 12,
+                      "issue_number": 3,
+                      "year": 2026,
+                      "title": "Spiking Network Models for Sensor Fusion",
+                      "authors": [
+                        "Chan, Wai Ming",
+                        "Lee, Sze Yan"
+                      ],
+                      "start_page": 101,
+                      "end_page": 115,
+                      "doi": "10.9999/ncl.12.3.101",
+                      "saved": true
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Saved articles"
+        ],
+        "operationId": "save_article",
+        "summary": "Save article",
+        "description": "Save an article to My Articles. The journal need not be on the bookshelf.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SaveArticleRequest"
+              },
+              "example": {
+                "article_id": "A013"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Article saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArticleResponse"
+                },
+                "example": {
+                  "data": {
+                    "article_id": "A013",
+                    "journal_id": "J03",
+                    "journal_title": "Neural Computation Letters",
+                    "issue_id": "I05",
+                    "volume": 12,
+                    "issue_number": 3,
+                    "year": 2026,
+                    "title": "Spiking Network Models for Sensor Fusion",
+                    "authors": [
+                      "Chan, Wai Ming",
+                      "Lee, Sze Yan"
+                    ],
+                    "start_page": 101,
+                    "end_page": 115,
+                    "doi": "10.9999/ncl.12.3.101",
+                    "saved": true
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The article does not exist.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The article is already saved.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saved-articles/{article_id}": {
+      "delete": {
+        "tags": [
+          "Saved articles"
+        ],
+        "operationId": "remove_saved_article",
+        "summary": "Remove saved article",
+        "parameters": [
+          {
+            "name": "article_id",
+            "in": "path",
+            "required": true,
+            "description": "Article identifier.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "A013"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Removed"
+          },
+          "404": {
+            "description": "The article does not exist.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The article is not saved.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/saved-articles/{article_id}/citation": {
+      "get": {
+        "tags": [
+          "Citations"
+        ],
+        "operationId": "export_citation",
+        "summary": "Export citation",
+        "description": "BibTeX or RIS record built only from stored metadata. BibTeX key: lowercase first-author surname + year + lowercase article ID.",
+        "parameters": [
+          {
+            "name": "article_id",
+            "in": "path",
+            "required": true,
+            "description": "Article identifier.",
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+            },
+            "example": "A013"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "bibtex",
+                "ris"
+              ]
+            },
+            "example": "bibtex"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Citation text",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "bibtex": {
+                    "summary": "format=bibtex",
+                    "value": "@article{chan2026a013,\n  author = {Chan, Wai Ming and Lee, Sze Yan},\n  title = {Spiking Network Models for Sensor Fusion},\n  journal = {Neural Computation Letters},\n  year = {2026},\n  volume = {12},\n  number = {3},\n  pages = {101--115},\n  doi = {10.9999/ncl.12.3.101},\n  issn = {2049-3630}\n}\n"
+                  },
+                  "ris": {
+                    "summary": "format=ris",
+                    "value": "TY  - JOUR\nAU  - Chan, Wai Ming\nAU  - Lee, Sze Yan\nTI  - Spiking Network Models for Sensor Fusion\nJO  - Neural Computation Letters\nPY  - 2026\nVL  - 12\nIS  - 3\nSP  - 101\nEP  - 115\nDO  - 10.9999/ncl.12.3.101\nSN  - 2049-3630\nER  - \n"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "The article does not exist.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "The article is not saved.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Problem"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/health": {
+      "get": {
+        "tags": [
+          "Health"
+        ],
+        "operationId": "health_check",
+        "summary": "Health check",
+        "description": "Platform probe; kept as plain {\"status\": \"ok\"}, outside the data envelope.",
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Health"
+                },
+                "example": {
+                  "status": "ok"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "The database cannot be read."
+          },
+          "422": {
+            "description": "Invalid input: malformed ID, bad query value, missing or unknown field.",
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationProblem"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddBookshelfRequest": {
+        "type": "object",
+        "properties": {
+          "journal_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          }
+        },
+        "required": [
+          "journal_id"
+        ],
+        "additionalProperties": false
+      },
+      "Article": {
+        "type": "object",
+        "properties": {
+          "article_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "journal_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "journal_title": {
+            "type": "string"
+          },
+          "issue_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "volume": {
+            "type": "integer"
+          },
+          "issue_number": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "title": {
+            "type": "string"
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Each as 'Surname, Given'."
+          },
+          "start_page": {
+            "type": "integer"
+          },
+          "end_page": {
+            "type": "integer"
+          },
+          "doi": {
+            "type": "string"
+          },
+          "saved": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "article_id",
+          "journal_id",
+          "journal_title",
+          "issue_id",
+          "volume",
+          "issue_number",
+          "year",
+          "title",
+          "authors",
+          "start_page",
+          "end_page",
+          "doi",
+          "saved"
+        ],
+        "additionalProperties": false
+      },
+      "ArticleList": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Article"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "ArticleList"
+      },
+      "ArticleResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Article"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "ArticleResponse"
+      },
+      "Bookshelf": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/BookshelfEntry"
+            },
+            "type": "array",
+            "title": "Data"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "Bookshelf"
+      },
+      "BookshelfEntry": {
+        "type": "object",
+        "properties": {
+          "journal_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "issn": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{3}[0-9X]$"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "unread_count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "journal_id",
+          "title",
+          "issn",
+          "subject",
+          "unread_count"
+        ],
+        "additionalProperties": false
+      },
+      "BookshelfEntryResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/BookshelfEntry"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "BookshelfEntryResponse"
+      },
+      "Issue": {
+        "type": "object",
+        "properties": {
+          "issue_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "volume": {
+            "type": "integer"
+          },
+          "issue_number": {
+            "type": "integer"
+          },
+          "year": {
+            "type": "integer"
+          },
+          "publication_date": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date",
+            "description": "null while status is in_press."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "published",
+              "in_press"
+            ]
+          },
+          "article_count": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "issue_id",
+          "volume",
+          "issue_number",
+          "year",
+          "publication_date",
+          "status",
+          "article_count"
+        ],
+        "additionalProperties": false
+      },
+      "JournalDetail": {
+        "type": "object",
+        "properties": {
+          "journal_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "issn": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{3}[0-9X]$"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "publisher": {
+            "type": "string"
+          },
+          "in_bookshelf": {
+            "type": "boolean"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            },
+            "description": "Newest first."
+          }
+        },
+        "required": [
+          "journal_id",
+          "title",
+          "issn",
+          "subject",
+          "publisher",
+          "in_bookshelf",
+          "issues"
+        ],
+        "additionalProperties": false
+      },
+      "JournalList": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/JournalSummary"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/PageMeta"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "JournalList"
+      },
+      "JournalResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/JournalDetail"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "JournalResponse"
+      },
+      "JournalSummary": {
+        "type": "object",
+        "properties": {
+          "journal_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "title": {
+            "type": "string"
+          },
+          "issn": {
+            "type": "string",
+            "pattern": "^[0-9]{4}-[0-9]{3}[0-9X]$"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "in_bookshelf": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "journal_id",
+          "title",
+          "issn",
+          "subject",
+          "in_bookshelf"
+        ],
+        "additionalProperties": false
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "notification_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "journal_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "journal_title": {
+            "type": "string"
+          },
+          "issue_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          },
+          "volume": {
+            "type": "integer"
+          },
+          "issue_number": {
+            "type": "integer"
+          },
+          "publication_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "article_count": {
+            "type": "integer"
+          },
+          "read": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "notification_id",
+          "journal_id",
+          "journal_title",
+          "issue_id",
+          "volume",
+          "issue_number",
+          "publication_date",
+          "article_count",
+          "read"
+        ],
+        "additionalProperties": false
+      },
+      "NotificationList": {
+        "properties": {
+          "data": {
+            "items": {
+              "$ref": "#/components/schemas/Notification"
+            },
+            "type": "array",
+            "title": "Data"
+          },
+          "meta": {
+            "$ref": "#/components/schemas/NotificationMeta"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data",
+          "meta"
+        ],
+        "title": "NotificationList"
+      },
+      "NotificationMeta": {
+        "properties": {
+          "unread_count": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Unread Count",
+            "description": "Unread visible notifications, regardless of the filter."
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "unread_count"
+        ],
+        "title": "NotificationMeta"
+      },
+      "NotificationResponse": {
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Notification"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "data"
+        ],
+        "title": "NotificationResponse"
+      },
+      "PageMeta": {
+        "properties": {
+          "total": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Total",
+            "description": "Matches before paging."
+          },
+          "limit": {
+            "type": "integer",
+            "title": "Limit"
+          },
+          "offset": {
+            "type": "integer",
+            "title": "Offset"
+          }
+        },
+        "additionalProperties": false,
+        "type": "object",
+        "required": [
+          "total",
+          "limit",
+          "offset"
+        ],
+        "title": "PageMeta"
+      },
+      "Problem": {
+        "description": "RFC 9457 problem details, sent as application/problem+json for every 4xx.",
+        "properties": {
+          "type": {
+            "default": "about:blank",
+            "title": "Type",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "instance": {
+            "title": "Instance",
+            "type": "string"
+          }
+        },
+        "required": [
+          "title",
+          "status",
+          "detail",
+          "instance"
+        ],
+        "title": "Problem",
+        "type": "object"
+      },
+      "SaveArticleRequest": {
+        "type": "object",
+        "properties": {
+          "article_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$"
+          }
+        },
+        "required": [
+          "article_id"
+        ],
+        "additionalProperties": false
+      },
+      "FieldError": {
+        "additionalProperties": false,
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "pointer": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "JSON Pointer into the request body, e.g. #/journal_id.",
+            "title": "Pointer"
+          },
+          "parameter": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "description": "Name of the query or path parameter.",
+            "title": "Parameter"
+          }
+        },
+        "required": [
+          "detail"
+        ],
+        "title": "FieldError",
+        "type": "object"
+      },
+      "ValidationProblem": {
+        "properties": {
+          "type": {
+            "default": "about:blank",
+            "title": "Type",
+            "type": "string"
+          },
+          "title": {
+            "title": "Title",
+            "type": "string"
+          },
+          "status": {
+            "title": "Status",
+            "type": "integer"
+          },
+          "detail": {
+            "title": "Detail",
+            "type": "string"
+          },
+          "instance": {
+            "title": "Instance",
+            "type": "string"
+          },
+          "errors": {
+            "description": "One entry per invalid input.",
+            "items": {
+              "$ref": "#/components/schemas/FieldError"
+            },
+            "title": "Errors",
+            "type": "array"
+          }
+        },
+        "required": [
+          "title",
+          "status",
+          "detail",
+          "instance",
+          "errors"
+        ],
+        "title": "ValidationProblem",
+        "type": "object"
+      },
+      "Health": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "ok"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ],
+        "additionalProperties": false
+      }
+    }
+  }
+}

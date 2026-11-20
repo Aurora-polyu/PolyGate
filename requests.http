@@ -1,0 +1,66 @@
+@base = http://127.0.0.1:8000
+# Deployed on ceAI+ (public path; no trailing slash):
+# @base = https://apps.polylink.org/<username>/<app-name>
+
+### Health
+GET {{base}}/health
+
+### W1 Search journals
+GET {{base}}/journals?q=neural
+
+### W1 Journal details
+GET {{base}}/journals/J03
+
+### W2 Follow J03
+POST {{base}}/bookshelf
+Content-Type: application/json
+
+{"journal_id": "J03"}
+
+### W2 Follow again (409)
+POST {{base}}/bookshelf
+Content-Type: application/json
+
+{"journal_id": "J03"}
+
+### W2 List bookshelf
+GET {{base}}/bookshelf
+
+### W3 Unread notifications
+GET {{base}}/notifications?status=unread
+
+### W3 Mark N-I05 read
+POST {{base}}/notifications/N-I05/read
+
+### W3 Mark N-I05 read again (409)
+POST {{base}}/notifications/N-I05/read
+
+### W4 Articles of J03 issue I05
+GET {{base}}/journals/J03/articles?issue_id=I05
+
+### W4 Save A013
+POST {{base}}/saved-articles
+Content-Type: application/json
+
+{"article_id": "A013"}
+
+### W4 List saved articles
+GET {{base}}/saved-articles
+
+### W5 Export BibTeX
+GET {{base}}/saved-articles/A013/citation?format=bibtex
+
+### W5 Export RIS
+GET {{base}}/saved-articles/A013/citation?format=ris
+
+### Errors: unknown journal (404), unsaved export (409), bad format (422)
+GET {{base}}/journals/J99
+
+###
+GET {{base}}/saved-articles/A001/citation?format=ris
+
+###
+GET {{base}}/saved-articles/A013/citation?format=pdf
+
+### W2 Unfollow J03
+DELETE {{base}}/bookshelf/J03
